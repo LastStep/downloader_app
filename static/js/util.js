@@ -1,5 +1,8 @@
-function search() {
-    var searchTerm = document.getElementById('searchTerm');
+
+function getSearch(ele) {
+    var searchTerm = ele.querySelector('input');
     searchTerm = searchTerm.value;
-    console.log(searchTerm);
+    return searchTerm;
 }
+
+module.exports = getSearch;

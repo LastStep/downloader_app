@@ -8,7 +8,10 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
     }
   })
 
@@ -46,3 +49,6 @@ app.on('window-all-closed', function () {
 try {
   require('electron-reloader')(module)
 } catch (_) {}
+
+require('@electron/remote/main').initialize()
+

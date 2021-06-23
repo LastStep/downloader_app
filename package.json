@@ -18,10 +18,11 @@
   },
   "homepage": "https://github.com/LastStep/downloader_app#readme",
   "devDependencies": {
-    "electron": "^13.1.2",
+    "electron": "^13.1.4",
     "electron-reloader": "^1.2.1"
   },
   "dependencies": {
+    "@electron/remote": "^1.2.0",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.10",
     "puppeteer": "^10.0.0"
