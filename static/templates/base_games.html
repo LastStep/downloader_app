@@ -4,12 +4,18 @@
 <head>
     <meta charset="UTF-8" />
     <title>Download Anime</title>
+    <script>
+        if (typeof module === 'object') {window.module = module; module = undefined;}
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         const scrape_fitgirl = require('../../scrapers/scraper_fitgirl.js');
+        const scrape_steamunlocked = require('../../scrapers/scraper_steamunlocked.js');
     </script>
+    <script>if (window.module) module = window.module;</script>
 </head>
 
 <body>
@@ -19,22 +25,50 @@
         </li>
     </ul>
 
-    <div class="vertical-menu">
+    <!-- <div class="vertical-menu">
         <a name="fitgirl" href="#">Fitgirl</a>
-        <a name="nyaa" href="#">Nyaa</a>
-    </div>
+        <a name="steamunlocked" href="#">Steam Unlocked</a>
+    </div> -->
 
-    
-    <div class="wrap firgirl-block">
-        <div class="search">
-            <input type="text" class="searchTerm" id="searchTerm" placeholder="Search..." />
-            <button type="button" onclick="scrape_fitgirl(this.parentNode)" class="searchButton">
-                <i class="fa fa-search"></i>
-            </button>
+    <div class="wrap">
+        <div class="input-group search">
+            <input type="text" class="searchTerm form-control" placeholder="Search..." />
+            <div class="input-group-append">
+                <select class="form-control selectWebsite" name="selectWebsite">
+                    <option selected value="all">All</option>
+                    <option value="fitgirl">Fitgirl</option>
+                    <option value="steamunlocked">Steam Unlocked</option>
+                </select>
+                <button type="button" class="searchButton" onclick="scrape_sites()">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
     </div>
 
     <div id="result"></div>
+
+    <script>
+        function scrape_sites() {
+            // define all available functions here
+            var scrapeFunctions = {
+                'fitgirl': scrape_fitgirl,
+                'steamunlocked': scrape_steamunlocked
+            };
+
+            var siteSelection = document.querySelector('.selectWebsite').value;
+            var searchSection = document.querySelector('.searchTerm').parentNode;
+
+            if (siteSelection == 'all') {
+                for (var eachFunc in scrapeFunctions) {
+                    scrapeFunctions[eachFunc](searchSection);
+                }   
+            }
+            else {
+                scrapeFunctions[siteSelection](searchSection);
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -25,6 +25,14 @@ body {
     color: #00b4cc;
 }
 
+.search select {
+    width: 150px;
+}
+
+.search select:focus {
+    width: auto;
+}
+
 .searchButton {
     width: 40px;
     height: 36px;
@@ -39,7 +47,7 @@ body {
 
 /*Resize the wrap to see the search bar change!*/
 .wrap {
-    width: 30%;
+    width: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
