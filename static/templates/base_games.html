@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
-        const scrape_fitgirl = require('../../scrapers/scraper_fitgirl.js');
-        const scrape_steamunlocked = require('../../scrapers/scraper_steamunlocked.js');
+        const scrapeSites = require('../../scrapers/base_scraper.js');
     </script>
     <script>if (window.module) module = window.module;</script>
 </head>
@@ -25,11 +24,6 @@
         </li>
     </ul>
 
-    <!-- <div class="vertical-menu">
-        <a name="fitgirl" href="#">Fitgirl</a>
-        <a name="steamunlocked" href="#">Steam Unlocked</a>
-    </div> -->
-
     <div class="wrap">
         <div class="input-group search">
             <input type="text" class="searchTerm form-control" placeholder="Search..." />
@@ -39,7 +33,7 @@
                     <option value="fitgirl">Fitgirl</option>
                     <option value="steamunlocked">Steam Unlocked</option>
                 </select>
-                <button type="button" class="searchButton" onclick="scrape_sites()">
+                <button type="button" class="searchButton" onclick="scrapeSites('games')">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -47,28 +41,6 @@
     </div>
 
     <div id="result"></div>
-
-    <script>
-        function scrape_sites() {
-            // define all available functions here
-            var scrapeFunctions = {
-                'fitgirl': scrape_fitgirl,
-                'steamunlocked': scrape_steamunlocked
-            };
-
-            var siteSelection = document.querySelector('.selectWebsite').value;
-            var searchSection = document.querySelector('.searchTerm').parentNode;
-
-            if (siteSelection == 'all') {
-                for (var eachFunc in scrapeFunctions) {
-                    scrapeFunctions[eachFunc](searchSection);
-                }   
-            }
-            else {
-                scrapeFunctions[siteSelection](searchSection);
-            }
-        }
-    </script>
 </body>
 
 </html>
